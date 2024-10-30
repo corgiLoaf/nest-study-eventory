@@ -117,6 +117,10 @@ export class EventService {
       throw new ConflictException('참여하지 않은 사용자입니다.');
     }
 
+    if (event.hostId === userId) {
+      throw new ConflictException('Host는 Event에서 나갈 수 없습니다.');
+    }
+
     await this.eventRepository.outEvent(eventId, userId);
   }
 }
